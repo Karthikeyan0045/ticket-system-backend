@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+           https://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.support</groupId>
+    <artifactId>ticket-system</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>ticket-system</name>
+    <description>Support Ticket System (Spring Boot 4)</description>
+
+    <!-- Use Spring Boot parent (4.0.0) -->
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>4.0.0</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
+
+    <properties>
+        <java.version>17</java.version>
+        <!-- control resource plugin and compiler -->
+        <maven.resources.plugin.version>3.3.1</maven.resources.plugin.version>
+        <maven.compiler.plugin.version>3.11.0</maven.compiler.plugin.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <!-- springdoc starter for Boot 4: use 3.0.0 (check compatibility if you see startup errors) -->
+        <springdoc.version>3.0.0</springdoc.version>
+    </properties>
+
+    <dependencies>
+        <!-- Spring Web, JPA, Actuator, Validation, H2 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-validation</artifactId>
+        </dependency>
+
+        <dependency>
+    <groupId>com.h2database</groupId>
+    <artifactId>h2</artifactId>
+    <version>2.2.224</version><!--$NO-MVN-MAN-VER$-->
+</dependency>
+
+
+        <!-- lombok -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <optional>true</optional>
+        </dependency>
+
+        <!-- springdoc openapi starter (latest 3.x for Boot 4 compatibility) -->
+        <dependency>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+            <version>${springdoc.version}</version>
+        </dependency>
+<!-- Security -->
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-security</artifactId>
+</dependency>
+
+<!-- JWT -->
+<dependency>
+    <groupId>io.jsonwebtoken</groupId>
+    <artifactId>jjwt-api</artifactId>
+    <version>0.11.2</version>
+</dependency>
+<dependency>
+    <groupId>io.jsonwebtoken</groupId>
+    <artifactId>jjwt-impl</artifactId>
+    <version>0.11.2</version>
+    <scope>runtime</scope>
+</dependency>
+<dependency>
+    <groupId>io.jsonwebtoken</groupId>
+    <artifactId>jjwt-jackson</artifactId>
+    <version>0.11.2</version>
+    <scope>runtime</scope>
+</dependency>
+
+<!-- File Upload -->
+
+        <!-- Optional: include if you need reactive or webflux features -->
+        <!-- <dependency> ... spring-boot-starter-webflux ... </dependency> -->
+    </dependencies>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+
+                <!-- Compiler plugin -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>${maven.compiler.plugin.version}</version>
+                    <configuration>
+                        <source>${java.version}</source>
+                        <target>${java.version}</target>
+                        <encoding>${project.build.sourceEncoding}</encoding>
+                        <release>${java.version}</release>
+                    </configuration>
+                </plugin>
+
+                <!-- Resources plugin (explicit version + safe config for resource filtering) -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-resources-plugin</artifactId>
+                    <version>${maven.resources.plugin.version}</version>
+                    <configuration>
+                        <!-- avoid weird token/encoding issues during testResources -->
+                        <encoding>${project.build.sourceEncoding}</encoding>
+                        <useDefaultDelimiters>true</useDefaultDelimiters>
+                        <escapeString>\</escapeString>
+                        <!-- if you do not use filtering, ensure this is off to avoid failures -->
+                        <nonFilteredFileExtensions>
+                            <nonFilteredFileExtension>gif</nonFilteredFileExtension>
+                            <nonFilteredFileExtension>jpg</nonFilteredFileExtension>
+                            <nonFilteredFileExtension>png</nonFilteredFileExtension>
+                        </nonFilteredFileExtensions>
+                    </configuration>
+                </plugin>
+
+                <!-- Spring Boot Maven plugin -->
+                <plugin>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-maven-plugin</artifactId>
+                </plugin>
+
+            </plugins>
+        </pluginManagement>
+    </build>
+
+</project>
