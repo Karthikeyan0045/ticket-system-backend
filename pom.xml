@@ -104,7 +104,6 @@
     </dependencies>
 
     <build>
-        <pluginManagement>
             <plugins>
 
                 <!-- Compiler plugin -->
@@ -154,7 +153,6 @@
 
 
             </plugins>
-        </pluginManagement>
     </build>
 
 </project>
