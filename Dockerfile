@@ -6,4 +6,4 @@ COPY . .
 
 RUN chmod +x mvnw && ./mvnw clean package -DskipTests
 
-CMD ["java","-jar","target/ticket-system.jar"]
+CMD ["java","-jar","target/ticket-system-0.0.1-SNAPSHOT.jar"]
